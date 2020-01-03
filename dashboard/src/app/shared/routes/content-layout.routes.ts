@@ -6,5 +6,9 @@ export const CONTENT_ROUTES: Routes = [
     {
         path: 'content-layout',
         loadChildren: () => import('../../pages/content-layout-page/content-pages.module').then(m => m.ContentPagesModule)
-      }
+    },
+    {
+      path: 'login',
+      loadChildren: () => import('../../pages/login-page/login.module').then(m => m.LoginModule)
+    }
 ];
