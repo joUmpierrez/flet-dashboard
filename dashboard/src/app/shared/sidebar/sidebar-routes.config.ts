@@ -3,6 +3,9 @@ import { RouteInfo } from './sidebar.metadata';
 export const ROUTES: RouteInfo[] = [
 
     {
+        path: '/orders',title: 'Orders', icon: 'ft-layout', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+    },
+    {
         path: '/full-layout', title: 'Full Layout', icon: 'ft-layout', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {

@@ -30,7 +30,7 @@ export class AuthService {
         'token-type': localStorage.getItem('token-type'),
         'expiry': localStorage.getItem('expiry'),
       }),
-      observe: 'response'
+      // observe: 'response'
     };
     return httpOptions;
   }
