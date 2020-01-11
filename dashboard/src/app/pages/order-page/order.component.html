@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-sm-12">
-        <div class="card">
+        <h2>Orders</h2>
+        <!-- <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Orders</h4>
             </div>
@@ -10,7 +11,7 @@
                     <h5>{{order.status}}</h5>
                     <hr>
                 </div>
-                <!-- <div class="card-body mt-2">
+                <div class="card-body mt-2">
                     <app-dt-paging
                             *ngIf="orders"
                             [data]="orders"
@@ -22,7 +23,19 @@
                     <ng-template #action_column let-row="row" let-value="value" ngx-datatable-cell-template>
                         <button (click)="goToOrderDetail(value)" [ngbTooltip]="'Ver detalle'" style="background: transparent;color: black;" class="btn btn-secondary mr-1 btn-fab order-detail-icon"><i class="fa fa-eye"></i></button>
                     </ng-template>
-                </div> -->
+                </div>
+            </div>
+        </div> -->
+        <div class="card" *ngFor="let order of orders">
+            <div class="card-header">
+                <h4 class="card-title">{{order.issue}}</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body mt-2">
+                    <h5>{{order.status}}</h5>
+                    <p>{{order.description}}</p>
+                    <p>{{order.drop_off_address}}</p>
+                </div>
             </div>
         </div>
     </div>
