@@ -1,3 +1,8 @@
+<div class="row text-left">
+    <div class="col-sm-12">
+      <div class="content-header">Orders</div>
+    </div>
+</div>
 <div class="row">
     <div class="col-sm-12">
         <div class="card">
@@ -15,6 +20,23 @@
                     <!-- <ng-template #action_column let-row="row" let-value="value" ngx-datatable-cell-template>
                         <button (click)="goToOrderDetail(value)" [ngbTooltip]="'Ver detalle'" style="background: transparent;color: black;" class="btn btn-secondary mr-1 btn-fab order-detail-icon"><i class="fa fa-eye"></i></button>
                     </ng-template> -->
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">This is the header</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body mt-2">
+                    <div class="chart">
+                        <canvas baseChart
+                          [data]="pieChartData"
+                          [labels]="pieChartLabels"
+                          [chartType]="pieChartType"
+                          [options]="pieChartOptions">
+                        </canvas>
+                      </div>
                 </div>
             </div>
         </div>

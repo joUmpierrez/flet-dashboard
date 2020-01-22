@@ -12,14 +12,17 @@ export const ROUTES: RouteInfo[] = [
         path: '/content-layout', title: 'Content Layout', icon: 'ft-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {
-        path: '', title: 'Orders', icon: 'ft-align-left', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
+        path: '', title: 'Orders', icon: 'ft-shopping-cart', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false,
         submenu: [
             {
-                path: '/orders', title: 'Order List', icon: 'ft-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+                path: '/orders', title: 'Order List', icon: 'ft-clipboard', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
             },
             {
-                path: '/order-stats', title: 'Statistics', icon: 'ft-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+                path: '/order-stats', title: 'Statistics', icon: 'ft-trending-up', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
             },
+            {
+                path: '/order-create', title: 'Create Orders', icon: 'ft-plus-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+            }
         ]
     },
     {

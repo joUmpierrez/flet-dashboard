@@ -17,5 +17,9 @@ export const Full_ROUTES: Routes = [
   {
     path: 'order-stats',
     loadChildren: () => import('../../pages/order-stats-page/order-stats.module').then(m => m.OrderStatsModule)
+  },
+  {
+    path: 'order-create',
+    loadChildren: () => import('../../pages/order-create-page/order-create.module').then(m => m.OrderCreateModule)
   }
 ];

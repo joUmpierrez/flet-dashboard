@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import { ordersURL } from 'app/shared/routes/server-routes';
+import { ordersURL, driversURL } from 'app/shared/routes/server-routes';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'app/shared/auth/auth.service';
 import { catchError } from 'rxjs/operators';
@@ -14,11 +14,18 @@ export class OrderService{
         return this.http.post(ordersURL, null, this.auth.injectHeaders())
         .pipe(
             catchError(this.handleError)
-        )
+        );
+    }
+
+    getDrivers(){
+        return this.http.post(driversURL, null, this.auth.injectHeaders())
+        .pipe(
+            catchError(this.handleError)
+        );
     }
 
     handleError(error) {
         const errorMessage = error.error.errors[0];
         return throwError(errorMessage);
-      }
+    }
 }
