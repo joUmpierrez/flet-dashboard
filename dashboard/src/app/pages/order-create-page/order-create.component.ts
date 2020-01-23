@@ -16,6 +16,8 @@ export class OrderCreateComponent implements OnInit {
     // private orderSerice: OrderService;
     private orderService: OrderService
     private clientService: ClientService;
+    public lat = 40.730610;
+    public lng = -73.935242;
     public drivers: any;
     public clients: any;
     // public orders: any;
