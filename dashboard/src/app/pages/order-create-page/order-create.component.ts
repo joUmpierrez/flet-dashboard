@@ -1,33 +1,71 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 import { OrderService } from 'app/shared/services/orders/order.service';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'app/shared/auth/auth.service';
 import { ClientService } from 'app/shared/services/clients/clients.service';
+import { FletMaps } from 'app/shared/interfaces/Maps.interface';
+import { LatLng } from '@agm/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
+    // tslint:disable-next-line: component-selector
     selector: 'orders-create',
     templateUrl: './order-create.component.html',
     styleUrls: ['./order-create.component.scss']
 })
 
-export class OrderCreateComponent implements OnInit {
+export class OrderCreateComponent implements OnInit, FletMaps {
 
-    // private orderSerice: OrderService;
-    private orderService: OrderService
+    private orderService: OrderService;
     private clientService: ClientService;
-    public lat = 40.730610;
-    public lng = -73.935242;
+    public zoom = 12;
+    private numericRegex = /^[0-9]*$/;
+    public scroll = false;
+    public dropLat: Number = null;
+    public dropLng: Number = null;
+    public pickLat: Number = null;
+    public pickLng: Number = null;
+    public lat = -34.932311;
+    public lng = -54.956035;
     public drivers: any;
     public clients: any;
-    // public orders: any;
-    // public total_orders: any;
-    // public events: any;
-    // public dt_columns: any;
+    form = new FormGroup({
+        number: new FormControl('', [
+            Validators.required,
+            Validators.pattern(this.numericRegex),
+        ]),
+        issue: new FormControl('' , [
+            Validators.required,
+            Validators.maxLength(255),
+        ]),
+        description: new FormControl('', [
+            Validators.required,
+            Validators.maxLength(255),
+        ]),
+        trackingID: new FormControl('', [
+            Validators.required,
+            Validators.pattern(this.numericRegex),
+            Validators.maxLength(255),
+        ]),
+        addressPick: new FormControl('', [
+            Validators.required,
+            Validators.maxLength(255),
+        ]),
+        descPick: new FormControl('', [
+            Validators.maxLength(255),
+        ]),
+        datePick: new FormControl('', [
+            Validators.required,
+        ]),
+        addresDrop: new FormControl('', [
+            Validators.required,
+            
+        ]),
+      });
     @ViewChild('action_column', { static: true }) action_column: TemplateRef<any>;
 
     constructor(private http: HttpClient, private route: Router, private auth: AuthService) {
-        // this.orderSerice = new OrderService();
         this.orderService = new OrderService(http, auth);
         this.clientService = new ClientService(http, auth);
     }
@@ -35,55 +73,55 @@ export class OrderCreateComponent implements OnInit {
     ngOnInit(): void {
         this.getDrivers();
         this.getClients();
-        // this.orderService.getOrders().subscribe((res) =>{
-        //     console.log(res);
-        //     this.orders = res['data'];
-        //     console.log(this.orders);
-        // });
-        // this.getOrders();
-        // this.setEvents();
-        // this.setDtColumns();
     }
 
-    getDrivers(){
+    getDrivers() {
         this.orderService.getDrivers().subscribe((res) => {
             this.drivers = res['distributors'];
         });
     }
 
-    getClients(){
+    getClients() {
         this.clientService.getClients().subscribe((res) => {
             this.clients = res['clients'];
         })
     }
 
-    // setDtColumns(){
-    //     this.dt_columns = [
-    //         {name:'Id',prop:'id'},
-    //         {name:'Subject',prop:"issue"},
-    //         {name:'Driver', prop:"distributor.full_name"},
-    //         {name:"Pick Up Address",prop: "order_actions.pick_up_address"},
-    //         {name:"Pick Up Time",prop: "order_actions.pick_up_date"},
-    //         {name:"Drop Off Address",prop: "order_actions.drop_off_address"},
-    //         {name:"Drop Off Time",prop: "order_actions.drop_off_date"},
-    //         {name:"Recipient",prop: "order_actions.drop_off_recipient"},
-    //         {name:'Amount', prop:"amount"},
-    //         {name:'Status'},
-    //         {name:'Actions', cellTemplate:this.action_column, prop:"id"}
-    //     ];
-    // }
+    placeMarker($event, type) {
+        if (type === 'drop') {
+            this.dropLat = $event.coords.lat;
+            this.dropLng = $event.coords.lng;
+        } else {
+            this.pickLat = $event.coords.lat;
+            this.pickLng = $event.coords.lng;
+        }
+    }
 
-    // setEvents() {
-    //     const me = this;
-    //     const events = {
-    //         'search': function(params: any) {
-    //             me.getOrders(params);
-    //         }
-    //     };
-    //     this.events = events;
-    // }
+    get number() {
+        return this.form.get('number');
+    }
 
-    // goToOrderDetail(orderId){
-    //     this.route.navigate(['/orders/'+ orderId]);
-    // }
+    get issue() {
+        return this.form.get('issue');
+    }
+
+    get description() {
+        return this.form.get('description');
+    }
+
+    get trackingID() {
+        return this.form.get('trackingID');
+    }
+
+    get addressPick() {
+        return this.form.get('addressPick');
+    }
+
+    get descPick() {
+        return this.form.get('descPick');
+    }
+
+    get datePick() {
+        return this.form.get('datePick');
+    }
 }

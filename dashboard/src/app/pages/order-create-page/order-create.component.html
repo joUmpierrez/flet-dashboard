@@ -11,78 +11,37 @@
               </div>
             <div class="card-content">
                 <div class="px-3">
-                    <form class="form form-horizontal">
+                    <form [formGroup]="form" class="form form-horizontal">
                         <div class="form-body">
-                            <h4 class="form-section"><i class="ft-user"></i>Client Information</h4>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="firstNametxt">First Name: </label>
-                                <div class="col-md-9">
-                                  <input type="text" id="firstNametxt" class="form-control" name="firstName">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="lastNametxt">Last Name: </label>
-                                <div class="col-md-9">
-                                  <input type="text" id="lastNametxt" class="form-control" name="lastName">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="emailtxt">Email: </label>
-                                <div class="col-md-9">
-                                  <input type="email" id="emailtxt" class="form-control" name="email">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="addresstxt">Address: </label>
-                                <div class="col-md-9">
-                                  <input type="text" id="addresstxt" class="form-control" name="address">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="documentNumbertxt">Document Number: </label>
-                                <div class="col-md-9">
-                                  <input type="text" id="documentNumbertxt" class="form-control" name="documentNumber">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="documentTypeslt">Document Type</label>
-                                <div class="col-md-9">
-                                    <select class="form-control" name="documentTypeslt">
-                                        <option value="CI">C.I</option>
-                                        <option value="DNI">D.N.I</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="businessNametxt">Business Name: </label>
-                                <div class="col-md-9">
-                                  <input type="text" id="businessNametxt" class="form-control" name="businessName">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 label-control" for="phonetxt">Phone Number: </label>
-                                <div class="col-md-9">
-                                  <input type="number" id="phonetxt" class="form-control" name="phone">
-                                </div>
-                            </div>
                             <h4 class="form-section"><i class="ft-clipboard"></i> Order details</h4>
                             <div class="form-group row">
                                 <label class="col-md-3 label-control" for="numbertxt">Order Number: </label>
                                 <div class="col-md-9">
-                                  <input type="text" id="numbertxt" class="form-control" name="number">
+                                  <input type="text" id="numbertxt" class="form-control" formControlName="number">
+                                  <div class="alert alert-danger" *ngIf="number.touched && number.invalid">
+                                    <div *ngIf="number.errors.required">Order number is required</div>
+                                    <div *ngIf="number.errors.pattern">Only numerical characters</div>
+                                  </div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 label-control" for="issuetxt">Issue: </label>
                                 <div class="col-md-9">
-                                  <input type="text" id="issuetxt" class="form-control" name="issue">
+                                  <input type="text" id="issuetxt" class="form-control" formControlName="issue">
+                                  <div class="alert alert-danger" *ngIf="issue.touched && issue.invalid">
+                                    <div *ngIf="issue.errors.required">Order issue is required</div>
+                                    <div *ngIf="issue.errors.maxlength">Maximum 255 characters</div>
+                                  </div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 label-control" for="descriptiontxt">Description: </label>
                                 <div class="col-md-9">
-                                  <input type="text" id="descriptiontxt" class="form-control" name="description">
+                                  <input type="text" id="descriptiontxt" class="form-control" formControlName="description">
+                                  <div class="alert alert-danger" *ngIf="description.touched && description.invalid">
+                                    <div *ngIf="description.errors.required">Order description is required</div>
+                                    <div *ngIf="description.errors.maxlength">Maximum 255 characters</div>
+                                  </div>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -97,22 +56,142 @@
                             <div class="form-group row">
                                 <label class="col-md-3 label-control" for="trackingIdtxt">Tracking ID: </label>
                                 <div class="col-md-9">
-                                  <input type="text" id="trackingIdtxt" class="form-control" name="trackingId">
+                                  <input type="text" id="trackingIdtxt" class="form-control" formControlName="trackingID">
+                                  <div class="alert alert-danger" *ngIf="trackingID.touched && trackingID.invalid">
+                                    <div *ngIf="trackingID.errors.required">Tracking ID is required</div>
+                                    <div *ngIf="trackingID.errors.pattern">Only numerical characters</div>
+                                    <div *ngIf="trackingID.errors.maxlength" > Maximum length of 255 characters</div>
+                                  </div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 label-control" for="distributorslt">Driver: </label>
                                 <div class="col-md-9">
-                                  <select class="form-control" name="driverslt">
+                                  <select class="form-control">
                                       <option *ngFor="let driver of drivers" value={{driver.id}}>{{driver.name}} {{driver.lastname}}</option>
                                   </select>
                                 </div>
                             </div>
                             <h4 class="form-section"><i class="ft-navigation-2"></i>Pick Up</h4>
-                            <agm-map [latitude]="lat" [longitude]="lng">
-                              <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                            <div class="form-group row">
+                              <label class="col-md-3 label-control" for="addrestxt">Address: </label>
+                              <div class="col-md-9">
+                                <input type="text" id="addrestxt" class="form-control" formControlName="addressPick">
+                                <div class="alert alert-danger" *ngIf="addressPick.touched && addressPick.invalid">
+                                  <div *ngIf="addressPick.errors.required">Pick up address is required</div>
+                                  <div *ngIf="addressPick.errors.maxlength">Maximum lenght of 255 characters</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-3 label-control" for="descPicktxt">Description: </label>
+                              <div class="col-md-9">
+                                <input type="text" id="descPicktxt" class="form-control" formControlName="descPick">
+                                <div class="alert alert-danger" *ngIf="descPick.touched && descPick.invalid">
+                                  <div *ngIf="descPick.errors.maxlength">Maximum lenght of 255 characters</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-3 label-control" for="datePicktxt">Pick up Date: </label>
+                              <div class="col-md-9">
+                                <input type="date" id="datePicktxt" class="form-control" formControlName="datePick">
+                                <div class="alert alert-danger" *ngIf="datePick.touched && datePick.invalid">
+                                  <div *ngIf="datePick.errors.required">Pick up date is required</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-3 label-control" for="timePicktxt">Pick up Time: </label>
+                              <div class="col-md-9">
+                                <input type="time" id="timePicktxt" class="form-control">
+                              </div>
+                            </div>
+                            <agm-map draggableCursor="default" [latitude]="lat" [longitude]="lng" [zoom]="zoom" [scrollwheel]="scroll" (mapClick)="placeMarker($event,'pick')">
+                              <agm-marker [latitude]="pickLat" [longitude]="pickLng"></agm-marker>
+                            </agm-map>
+                            <h4 class="form-section"><i class="ft-package"></i>Drop Off</h4>
+                            <div class="form-group row">
+                              <label class="col-md-3 label-control" for="addresDroptxt">Address: </label>
+                              <div class="col-md-9">
+                                <input type="text" id="addresDroptxt" class="form-control" formControlName="addresDrop">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-3 label-control" for="descDroptxt">Description: </label>
+                              <div class="col-md-9">
+                                <input type="text" id="descDroptxt" class="form-control" formControlName="descDrop">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-3 label-control" for="dateDroptxt">Pick up Date: </label>
+                              <div class="col-md-9">
+                                <input type="date" id="dateDroptxt" class="form-control" formControlName="dateDrop">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-3 label-control" for="timeDroptxt">Pick up Time: </label>
+                              <div class="col-md-9">
+                                <input type="time" id="timeDroptxt" class="form-control" formControlName="timeDrop">
+                              </div>
+                            </div>
+                            <agm-map draggableCursor="default" [latitude]="lat" [longitude]="lng" [scrollwheel]="scroll" [zoom]="zoom" (mapClick)="placeMarker($event,'drop')">
+                              <agm-marker [latitude]="dropLat" [longitude]="dropLng"></agm-marker>
                             </agm-map>
                         </div>
+                        <h4 class="form-section"><i class="ft-user"></i>Client Information</h4>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="firstNametxt">First Name: </label>
+                                <div class="col-md-9">
+                                  <input type="text" id="firstNametxt" class="form-control" formControlName="firstName">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="lastNametxt">Last Name: </label>
+                                <div class="col-md-9">
+                                  <input type="text" id="lastNametxt" class="form-control" formControlName="lastName">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="emailtxt">Email: </label>
+                                <div class="col-md-9">
+                                  <input type="email" id="emailtxt" class="form-control" formControlName="email">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="addresstxt">Address: </label>
+                                <div class="col-md-9">
+                                  <input type="text" id="addresstxt" class="form-control" formControlName="address">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="documentNumbertxt">Document Number: </label>
+                                <div class="col-md-9">
+                                  <input type="text" id="documentNumbertxt" class="form-control" formControlName="documentNumber">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="documentTypeslt">Document Type</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" formControlName="documentTypeslt">
+                                        <option value="CI">C.I</option>
+                                        <option value="DNI">D.N.I</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="businessNametxt">Business Name: </label>
+                                <div class="col-md-9">
+                                  <input type="text" id="businessNametxt" class="form-control" formControlName="businessName">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" for="phonetxt">Phone Number: </label>
+                                <div class="col-md-9">
+                                  <input type="number" id="phonetxt" class="form-control" formControlName="phone">
+                                </div>
+                            </div>
                     </form>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import { OrderCreateRoutingModule } from './order-create-routing.module';
 import { OrderCreateComponent } from './order-create.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { SharedModule } from '../../components/shared.module';
 
 @NgModule({
@@ -12,8 +13,10 @@ import { AgmCoreModule } from '@agm/core';
         NgbModule,
         // SharedModule,
         OrderCreateRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
         AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyDsawToQzQlQyLeTARAD3CDA1JqugdPOoA',
+            apiKey: 'AIzaSyBjkGrmk4MZ1cRudaIBpEC1Rtqp_Uc-_jU',
         })
     ],
     exports: [],
