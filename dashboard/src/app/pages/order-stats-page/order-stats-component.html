@@ -7,7 +7,7 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Anual Order Rate</h4>
+                <h4 class="card-title">orders per hour</h4>
             </div>
             <div class="card-content">
                 <div class="card-body mt-2">
@@ -20,6 +20,21 @@
                     <!-- <ng-template #action_column let-row="row" let-value="value" ngx-datatable-cell-template>
                         <button (click)="goToOrderDetail(value)" [ngbTooltip]="'Ver detalle'" style="background: transparent;color: black;" class="btn btn-secondary mr-1 btn-fab order-detail-icon"><i class="fa fa-eye"></i></button>
                     </ng-template> -->
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Most active hours</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body mt-2">
+                    <x-chartist
+                        [type]="barChartType"
+                        [data]="barChartData"
+                        [options]="barChartOptions"
+                        [events]="barChartEvents"
+                    ></x-chartist>
                 </div>
             </div>
         </div>
