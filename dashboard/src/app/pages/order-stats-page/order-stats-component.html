@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="card">
+        <!-- <div class="card">
             <div class="card-header">
                 <h4 class="card-title">This is the header</h4>
             </div>
@@ -53,6 +53,50 @@
                         </canvas>
                       </div>
                 </div>
+            </div>
+        </div> -->
+        <!-- <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Delivery Suggestions</h4>
+            </div>
+            <div class="card-content">
+                <div *ngFor="let order of pendingOrders" class="card-body mt-2">
+                    <h5>{{order.issue}}</h5>
+                    <p>{{order.status}}</p>
+                    <p>{{order.delivery}}</p>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+<div class="content-header">Delivery Suggestions</div>
+<div class="row text-left">
+    <div *ngFor="let order of pendingOrders" class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{order.issue}}</h5>
+          <p class="card-text">{{order.status}}</p>
+          <p class="card-text">Driver: {{order.delivery}}</p>
+          <button class="btn btn-danger">
+            <a
+              (click)="submit()"
+              class="text-decoration-none text-white"
+              >ASSIGN</a
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="content-header">Deliveries E.T.A</div>
+<div class="row text-left">
+    <div *ngFor="let delivery of deliveriesETA" class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{delivery.issue}}</h5>
+                <p class="card-text">{{delivery.ETA}} remaining</p>
+                <p class="card-text">Driver: {{delivery.driver}}</p>
             </div>
         </div>
     </div>

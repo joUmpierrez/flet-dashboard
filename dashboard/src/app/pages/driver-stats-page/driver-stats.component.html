@@ -1,0 +1,70 @@
+<div class="row text-left">
+    <div class="col-sm-12">
+      <div class="content-header">Drivers</div>
+    </div>
+</div>
+
+<!-- <div class="content-header">Today's top Drivers</div>
+<div class="row text-left">
+    <div *ngFor="let driver of dayTopDrivers" class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{driver.fullName}}</h5>
+                <p class="card-text">{{driver.orderAmount}} deliveries made today!</p>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">Today's top Drivers</h4>
+    </div>
+    <div class="card-content">
+        <div class="card-body mt-2">
+            <x-chartist
+                [type]="barChartType"
+                [data]="barChartData"
+                [options]="barChartOptions"
+                [events]="barChartEvents"
+            ></x-chartist>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="content-header">This week's top Drivers</div>
+<div class="row text-left">
+    <div *ngFor="let driver of weekTopDrivers" class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{driver.fullName}}</h5>
+                <p class="card-text">{{driver.orderAmount}} deliveries made today!</p>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">This week's top Drivers</h4>
+    </div>
+    <div class="card-content">
+        <div class="card-body mt-2">
+            <div class="chart">
+                <canvas id="driversPieChart"  ></canvas>
+                </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-header">Inactive Drivers</div>
+<div class="row text-left">
+    <div *ngFor="let driver of inactiveDrivers" class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{driver.fullName}}</h5>
+                <p class="card-text">Inactive during {{driver.inactivity}}</p>
+            </div>
+        </div>
+    </div>
+</div>

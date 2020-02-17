@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from "@angular/common";
+import { CommonModule } from '@angular/common';
 import { OrderStatsRoutingModule } from './order-stats-routing.module';
 import { OrderStatsComponent } from './order-stats.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartistModule } from 'ng-chartist';
 import { ChartsModule } from 'ng2-charts';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 // import { SharedModule } from '../../components/shared.module';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { ChartsModule } from 'ng2-charts';
         NgbModule,
         ChartistModule,
         ChartsModule,
+        NgxChartsModule,
         // SharedModule,
         OrderStatsRoutingModule
     ],

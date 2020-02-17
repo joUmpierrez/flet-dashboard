@@ -53,7 +53,7 @@ export class AuthService {
         )
         .subscribe((res) => {
           this.extractHeaders(res);
-          this.route.navigateByUrl('/full-layout');
+          this.route.navigateByUrl('/orders');
         })
   }
 

@@ -7,6 +7,7 @@ import { ClientService } from 'app/shared/services/clients/clients.service';
 import { FletMaps } from 'app/shared/interfaces/Maps.interface';
 import { LatLng } from '@agm/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { delay } from 'rxjs/operators';
 
 @Component({
     // tslint:disable-next-line: component-selector
@@ -72,6 +73,7 @@ export class OrderCreateComponent implements OnInit, FletMaps {
 
     ngOnInit(): void {
         this.getDrivers();
+        delay(1000);
         this.getClients();
     }
 
@@ -88,6 +90,8 @@ export class OrderCreateComponent implements OnInit, FletMaps {
     }
 
     placeMarker($event, type) {
+        console.log($event.coords.lat);
+        console.log($event.coords.lng);
         if (type === 'drop') {
             this.dropLat = $event.coords.lat;
             this.dropLng = $event.coords.lng;

@@ -20,6 +20,52 @@ import {
 
 export class OrderStatsComponent implements OnInit {
 
+  deliveriesETA = [
+    {
+      'issue': '2 Menu number 7',
+      'ETA': '05:43',
+      'driver': 'L. Dominguez'
+    },
+    {
+      'issue': '2 Burger & Fries Combos',
+      'ETA': '15:01',
+      'driver': 'A. Peña'
+    },
+    {
+      'issue': '1 Cheddar & Bacon Burger',
+      'ETA': '01:07',
+      'driver': 'F. Díaz'
+    },
+    {
+      'issue': '1 Large Pepperoni Pizza',
+      'ETA': '10:59',
+      'driver': 'C. Altman'
+    },
+  ];
+
+  pendingOrders = [
+    {
+      'issue': 'Menu number 3',
+      'status': 'pending',
+      'delivery': 'J. Ramirez'
+    },
+    {
+      'issue': 'Menu number 1',
+      'status': 'pending',
+      'delivery': 'R. Wiggum'
+    },
+    {
+      'issue': '2 number 9',
+      'status': 'pending',
+      'delivery': 'R. Wiggum'
+    },
+    {
+      'issue': 'Menu number 3',
+      'status': 'pending',
+      'delivery': 'J. Ramirez'
+    },
+  ];
+
   pieChartData = [200, 100, 500];
   pieChartLabels = ['Set 1', 'Set 2', 'Set 3'];
   pieChartType = 'pie';

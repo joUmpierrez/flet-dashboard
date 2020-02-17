@@ -21,5 +21,17 @@ export const Full_ROUTES: Routes = [
   {
     path: 'order-create',
     loadChildren: () => import('../../pages/order-create-page/order-create.module').then(m => m.OrderCreateModule)
+  },
+  {
+    path: 'drivers-stats',
+    loadChildren: () => import('../../pages/driver-stats-page/driver-stats.module').then(m => m.DriverStatsModule)
+  },
+  {
+    path: 'heat-map',
+    loadChildren: () => import ('../../pages/heat-map-page/heat-map.module').then(m => m.HeatMapModule)
+  },
+  {
+    path: 'drivers-map',
+    loadChildren: () => import('../../pages/drivers-map/drivers-map.module').then(m => m.HeatMapModule)
   }
 ];
