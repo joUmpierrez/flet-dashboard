@@ -2,5 +2,10 @@ export const serverURL = 'https://server-mockup.herokuapp.com/';
 export const apiURL = 'https://api-dashb.herokuapp.com/';
 export const signInURL = apiURL + 'auth/login';
 export const ordersURL = serverURL + 'orders';
-export const driversURL = serverURL + 'users?role=delivery&_limit=10';
-
+export const driversURL = serverURL + 'users?role=delivery&merchant_id=1';
+export const ordersHourSortTime = apiURL + 'orders/ordersPerHour?sort=time';
+export const ordersHourSortOrders = apiURL + 'orders/ordersPerHour?sort=orders';
+export const heatMapUrl = apiURL + 'orders/heatMapDelivery';
+export const mostOrdersDay = apiURL + 'users/mostOrdersDay';
+export const mostOrdersWeek = apiURL + 'users/mostOrdersWeek';
+export const inactivity = apiURL + 'users/noDeliveryTime';

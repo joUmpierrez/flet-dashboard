@@ -1,6 +1,6 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, AfterContentInit } from '@angular/core';
 // import { OrderService } from 'app/services/order/order.service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { OrderService } from 'app/shared/services/orders/order.service';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'app/shared/auth/auth.service';
@@ -8,8 +8,8 @@ import {
   IBarChartOptions,
   IChartistAnimationOptions,
   IChartistData
-  } from 'chartist';
-  import { ChartEvent, ChartType } from 'ng-chartist';
+} from 'chartist';
+import { ChartEvent, ChartType } from 'ng-chartist';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -19,6 +19,14 @@ import {
 })
 
 export class OrderStatsComponent implements OnInit {
+  orderService;
+  ordersByTime = [];
+  ordersByTimeLabels: string[] = [];
+  ordersByTimeSeries: number[] = [];
+
+  ordersByTimeOrders = [];
+  ordersByTimeOrdersLabels = [];
+  ordersByTimeOrdersSeries = [];
 
   deliveriesETA = [
     {
@@ -103,31 +111,23 @@ export class OrderStatsComponent implements OnInit {
 
   type: ChartType = 'Line';
   data: IChartistData = {
-    labels: [
-      '08:00',
-      '09:00',
-      '10:00',
-      '11:00',
-      '12:00',
-      '13:00',
-      '14:00',
-      '15:00',
-      '16:00',
-      '17:00',
-      '18:00',
-      '19:00',
-    ],
+    labels: [],
     series: [
-      [20, 25, 20, 30, 45, 49, 30, 30, 25, 23, 25, 15]
+      [],
+      // [20, 25, 20, 30, 45, 49, 30, 30, 25, 23, 25, 15]
     ]
   };
+  // data: IChartistData = {
+  //   labels: this.ordersByTimeLabels,
+  //   series: [this.ordersByTimeSeries],
+  // };
 
   options: IBarChartOptions = {
     axisX: {
       showGrid: false
     },
     axisY: {
-        showGrid: true,
+      showGrid: true,
     },
     height: 300
   };
@@ -147,19 +147,49 @@ export class OrderStatsComponent implements OnInit {
     }
   };
 
-  // private orderService: OrderService
-  // public orders: any;
-  // public total_orders: any;
-  // public events: any;
-  // public dt_columns: any;
-  // @ViewChild('action_column', { static: true }) action_column: TemplateRef<any>;
-
   constructor(private http: HttpClient, private route: Router, private auth: AuthService) {
-      // this.orderSerice = new OrderService();
-      // this.orderService = new OrderService(http,auth);
+    this.orderService = new OrderService(http, auth);
   }
 
-  ngOnInit(): void {
 
+  ngOnInit(): void {
+    this.ordersPerHourTime();
+    this.ordersPerHourOrders();
+  }
+
+  ordersPerHourTime() {
+    this.orderService.ordersPerHour().subscribe((res) => {
+      this.ordersByTime = res;
+      this.ordersByTime.splice(0, 8);
+      this.ordersByTime.splice(12, 4);
+      this.ordersByTime.forEach(element => {
+        this.ordersByTimeLabels.push(element.hour + ':00'.toString());
+        // tslint:disable-next-line: radix
+        this.ordersByTimeSeries.push(parseInt(element.orders));
+      });
+      console.log(this.ordersByTimeLabels);
+      console.log(this.ordersByTimeSeries);
+      this.data = {
+        labels: this.ordersByTimeLabels,
+        series: [
+          this.ordersByTimeSeries,
+        ]
+      };
+    })
+  }
+
+  ordersPerHourOrders(){
+    this.orderService.ordersPerHourSortOrders().subscribe((res) => {
+      this.ordersByTimeOrders = res;
+      this.ordersByTimeOrders.splice(5);
+      this.ordersByTimeOrders.forEach(element => {
+        this.ordersByTimeOrdersLabels.push(element.hour + ':00'.toString());
+        this.ordersByTimeOrdersSeries.push(parseInt(element.orders));
+      });
+      this.barChartData = {
+        labels: this.ordersByTimeOrdersLabels,
+        series: [this.ordersByTimeOrdersSeries],
+      }
+    })
   }
 }

@@ -49,9 +49,9 @@
         <h4 class="card-title">This week's top Drivers</h4>
     </div>
     <div class="card-content">
-        <div class="card-body mt-2">
+        <div class="card-body">
             <div class="chart">
-                <canvas id="driversPieChart"  ></canvas>
+                <canvas id="driversPieChart" height="100"></canvas>
                 </div>
         </div>
     </div>
@@ -63,7 +63,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{driver.fullName}}</h5>
-                <p class="card-text">Inactive during {{driver.inactivity}}</p>
+                <p class="card-text">Inactive during {{driver.hours}}:{{driver.minutes}}:{{driver.seconds}}</p>
             </div>
         </div>
     </div>

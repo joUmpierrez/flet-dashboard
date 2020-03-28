@@ -5,6 +5,8 @@ import {Router} from '@angular/router';
 import { ChartType, ChartEvent } from 'ng-chartist';
 import { IChartistData, IBarChartOptions, IChartistAnimationOptions } from 'chartist';
 import * as Chart from 'chart.js';
+import { DriverService } from 'app/shared/services/drivers/driver.service';
+import { TimeInterval } from 'rxjs/internal/operators/timeInterval';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -13,6 +15,7 @@ import * as Chart from 'chart.js';
   styleUrls: ['./driver-stats.component.scss']
 })
 export class DriverStatsComponent implements OnInit {
+  private driverService;
   canvas: any;
   ctx: any;
 
@@ -98,55 +101,110 @@ export class DriverStatsComponent implements OnInit {
   ];
 
   inactiveDrivers = [
-    {
-      'fullName': 'Jose Ramirez',
-      'inactivity': '34:23',
-    },
-    {
-      'fullName': 'Leandro Dominguez',
-      'inactivity': '28:02',
-    },
-    {
-      'fullName': 'Alberto Peña',
-      'inactivity': '20:44',
-    },
-    {
-      'fullName': 'Florencia Díaz',
-      'inactivity': '12:54',
-    },
-    {
-      'fullName': 'Camila Altman',
-      'inactivity': '04:01',
-    },
+    // {
+    //   'fullName': 'Jose Ramirez',
+    //   'inactivity': '34:23',
+    // },
+    // {
+    //   'fullName': 'Leandro Dominguez',
+    //   'inactivity': '28:02',
+    // },
+    // {
+    //   'fullName': 'Alberto Peña',
+    //   'inactivity': '20:44',
+    // },
+    // {
+    //   'fullName': 'Florencia Díaz',
+    //   'inactivity': '12:54',
+    // },
+    // {
+    //   'fullName': 'Camila Altman',
+    //   'inactivity': '04:01',
+    // },
   ];
 
   private auth: AuthService;
   constructor(private http: HttpClient, private router: Router) {
     this.auth = new AuthService(this.http, this.router);
+    this.driverService = new DriverService(this.http, this.auth);
   }
+
   ngOnInit() {
+    this.driverService.getInactivity().subscribe((res) => {
+      res.splice(5);
+      res.forEach(element => {
+        let hours = element.noDeliveryTime.hours;
+        let minutes = element.noDeliveryTime.minutes;
+        let seconds = element.noDeliveryTime.seconds;
+        let json = {
+          fullName: element.user.name + ' ' + element.user.lastname,
+          hours: hours,
+          minutes: minutes,
+          seconds: seconds,
+        }
+        this.inactiveDrivers.push(json);
+      });
+      setInterval(() => {
+        this.inactiveDrivers.forEach(element => {
+          if(element.seconds > 0){
+            element.seconds--;
+          }
+          else if(element.minutes > 0){
+            element.seconds = 59;
+            element.minutes--;
+          }
+          else{
+            element.hours--;
+            element.seconds = 59;
+            element.minutes = 59;
+          }
+        })
+      },1000)
+    })
     this.canvas = document.getElementById('driversPieChart');
     this.ctx = this.canvas.getContext('2d');
-    let myChart = new Chart(this.ctx, {
-      type: 'pie',
-      data: {
-          labels: ['Jose Ramirez', 'Alberto Peña', 'Carolina Altman', 'lorencia Díaz', 'Leandro Dominguez'],
-          datasets: [{
-              label: 'Orders made',
-              data: [12, 11, 11, 6, 3],
-              backgroundColor: [
-                  'orange',
-                  'purple',
-                  'yellow',
-                  'rgba(56, 55, 123, 1)',
-                  'rgba(210, 30, 30, 1)',
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-      responsive: true,
+    let data = [];
+    let label = [];
+    this.driverService.getMostOrdersWeek().subscribe((res) => {
+      res.splice(5);
+      res.forEach(element => {
+        label.push(element.user.name + ' ' + element.user.lastname);
+        data.push(element.count);
+      });
+      let myChart = new Chart(this.ctx, {
+        type: 'doughnut',
+        data: {
+            labels: label,
+            datasets: [{
+                label: 'Orders made',
+                data: data,
+                backgroundColor: [
+                    'orange',
+                    'purple',
+                    'yellow',
+                    'rgba(56, 55, 123, 1)',
+                    'rgba(210, 30, 30, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+        responsive: true,
+        }
+      });
+    })
+    this.driverService.getMostOrdersDay().subscribe((res) => {
+      let labels = [];
+      let series = [];
+      res.splice(5);
+      res.forEach(element => {
+        labels.push(element.user.name + ' ' + element.user.lastname);
+        series.push(element.count);
+      });
+      this.barChartData = {
+        series:[series],
+        labels: labels,
       }
-    });
+    })
   }
 }

@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { ordersURL, driversURL } from 'app/shared/routes/server-routes';
+import { Injectable } from '@angular/core';
+import { ordersURL, driversURL, ordersHourSortTime, ordersHourSortOrders, heatMapUrl } from 'app/shared/routes/server-routes';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'app/shared/auth/auth.service';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 @Injectable()
@@ -18,9 +18,9 @@ export class OrderService {
     }
 
     getDrivers() {
-        return this.http.post(driversURL, null, this.auth.injectHeaders())
+        return this.http.get(driversURL)
             .pipe(
-                catchError(this.handleError)
+                catchError(this.handleError),
             );
     }
 
@@ -31,6 +31,38 @@ export class OrderService {
             .pipe(
                 catchError(this.handleError)
             )
+    }
+
+    ordersPerHour() {
+        const URL = ordersHourSortTime;
+        return this.http.get(URL)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    ordersPerHourSortOrders() {
+        const URL = ordersHourSortOrders;
+        return this.http.get(URL)
+            .pipe(
+                catchError(this.handleError),
+            );
+    }
+
+    addOrder(json){
+        const URL = ordersURL;
+        return this.http.post(URL,json)
+        .pipe(
+            catchError(this.handleError),
+        )
+    }
+
+    heatMapOrders(){
+        const URL = heatMapUrl;
+        return this.http.get(URL)
+        .pipe(
+            catchError(this.handleError),
+        )
     }
 
     handleError(error) {
