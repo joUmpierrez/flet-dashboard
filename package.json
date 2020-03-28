@@ -56,7 +56,9 @@
     "tslib": "1.9.3",
     "web-animations-js": "github:angular/web-animations-js#release_pr208",
     "zone.js": "~0.9.1",
-    "typescript": "3.4.5"
+    "typescript": "3.4.5",
+    "express": "*",
+    "body-parser": "*"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.24",
