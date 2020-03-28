@@ -19,7 +19,7 @@ import { delay } from 'rxjs/operators';
 export class OrderCreateComponent implements OnInit, FletMaps {
 
     private orderService: OrderService;
-    private clientService: ClientService;
+    // private clientService: ClientService;
     public zoom = 12;
     private numericRegex = /^[0-9]*$/;
     public scroll = false;
@@ -59,22 +59,23 @@ export class OrderCreateComponent implements OnInit, FletMaps {
         datePick: new FormControl('', [
             Validators.required,
         ]),
-        addresDrop: new FormControl('', [
+        addressDrop: new FormControl('', [
             Validators.required,
-            
         ]),
+        dateDrop: new FormControl('', [
+            Validators.required,
+        ])
       });
     @ViewChild('action_column', { static: true }) action_column: TemplateRef<any>;
 
     constructor(private http: HttpClient, private route: Router, private auth: AuthService) {
         this.orderService = new OrderService(http, auth);
-        this.clientService = new ClientService(http, auth);
+        // this.clientService = new ClientService(http, auth);
     }
 
     ngOnInit(): void {
         this.getDrivers();
-        delay(1000);
-        this.getClients();
+        // this.getClients();
     }
 
     getDrivers() {
@@ -83,11 +84,11 @@ export class OrderCreateComponent implements OnInit, FletMaps {
         });
     }
 
-    getClients() {
-        this.clientService.getClients().subscribe((res) => {
-            this.clients = res['clients'];
-        })
-    }
+    // getClients() {
+    //     this.clientService.getClients().subscribe((res) => {
+    //         this.clients = res['clients'];
+    //     })
+    // }
 
     placeMarker($event, type) {
         console.log($event.coords.lat);
@@ -127,5 +128,13 @@ export class OrderCreateComponent implements OnInit, FletMaps {
 
     get datePick() {
         return this.form.get('datePick');
+    }
+
+    get addressDrop () {
+        return this.form.get('addressDrop');
+    }
+
+    get dateDrop () {
+        return this.form.get('dateDrop');
     }
 }

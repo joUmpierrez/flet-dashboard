@@ -30,15 +30,22 @@
                 </div>
             </div>
         </div> -->
-        <div class="card" *ngFor="let order of orders">
+        <div class="card" *ngFor="let order of orders" [@simpleFadeAnimation]="'in'">
             <div class="card-header">
-                <h4 class="card-title">{{order.issue}}</h4>
+                <h4 style="display: inline;" class="card-title">{{order.client.name}} {{order.client.lastname}}</h4>
+                <span style="display: inline; cursor: pointer;" class="pull-right">
+                    <i class="ft-trash-2" (click)="deleteOrder($event, order.id)"></i>
+                </span>
+                <span style="display: inline; margin-right: 1%; cursor: pointer;" class="pull-right" >
+                    <i class="ft-edit-2"></i>
+                </span>
             </div>
             <div class="card-content">
                 <div class="card-body mt-2">
-                    <h5>{{order.status}}</h5>
-                    <p>{{order.description}}</p>
-                    <p>{{order.drop_off_address}}</p>
+                    <h5>{{order.issue}}</h5>
+                    <h5>{{order.client.address}}</h5>
+                    <p>$ {{order.price}}</p>
+                    <p>{{order.client.business_name}}</p>
                 </div>
             </div>
         </div>

@@ -112,9 +112,12 @@
                             </agm-map>
                             <h4 class="form-section"><i class="ft-package"></i>Drop Off</h4>
                             <div class="form-group row">
-                              <label class="col-md-3 label-control" for="addresDroptxt">Address: </label>
+                              <label class="col-md-3 label-control" for="addressDroptxt">Address: </label>
                               <div class="col-md-9">
-                                <input type="text" id="addresDroptxt" class="form-control" formControlName="addresDrop">
+                                <input type="text" id="addressDroptxt" class="form-control" formControlName="addressDrop">
+                                <div class="alert alert-danger" *ngIf="addressDrop.touched && addressDrop.invalid">
+                                  <div *ngIf="addressDrop.errors.required">Address is required</div>
+                                </div>
                               </div>
                             </div>
                             <div class="form-group row">
@@ -124,13 +127,16 @@
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label class="col-md-3 label-control" for="dateDroptxt">Pick up Date: </label>
+                              <label class="col-md-3 label-control" for="dateDroptxt">Drop off Date: </label>
                               <div class="col-md-9">
                                 <input type="date" id="dateDroptxt" class="form-control" formControlName="dateDrop">
+                                <div class="alert alert-danger" *ngIf="dateDrop.touched && dateDrop.invalid">
+                                  <div *ngIf="dateDrop.errors.required">Drop off date is required</div>
+                                </div>
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label class="col-md-3 label-control" for="timeDroptxt">Pick up Time: </label>
+                              <label class="col-md-3 label-control" for="timeDroptxt">Drop off Time: </label>
                               <div class="col-md-9">
                                 <input type="time" id="timeDroptxt" class="form-control" formControlName="timeDrop">
                               </div>

@@ -12,23 +12,14 @@ export class AuthService {
   constructor(private http: HttpClient, private route: Router) { }
 
   extractHeaders(res) {
-    localStorage.setItem('client', res.headers.get('client'));
-    localStorage.setItem('access-token', res.headers.get('access-token'));
-    localStorage.setItem('uid', res.headers.get('uid'));
-    localStorage.setItem('token-type', res.headers.get('token-type'));
-    localStorage.setItem('expiry', res.headers.get('expiry'));
-    localStorage.setItem('user', JSON.stringify(res.body.data));
+    localStorage.setItem('token', res.body['access_token']);
   }
 
   injectHeaders() {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json; charset=utf-8',
-        'client': localStorage.getItem('client'),
-        'access-token': localStorage.getItem('access-token'),
-        'uid': localStorage.getItem('uid'),
-        'token-type': localStorage.getItem('token-type'),
-        'expiry': localStorage.getItem('expiry'),
+        'token': localStorage.getItem('token'),
       }),
       // observe: 'response'
     };
@@ -52,6 +43,7 @@ export class AuthService {
             catchError(this.handleError)
         )
         .subscribe((res) => {
+          console.log(res);
           this.extractHeaders(res);
           this.route.navigateByUrl('/orders');
         })

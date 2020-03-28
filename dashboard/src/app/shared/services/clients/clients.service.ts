@@ -1,5 +1,4 @@
 import {Injectable} from "@angular/core";
-import { clientsURL } from 'app/shared/routes/server-routes';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'app/shared/auth/auth.service';
 import { catchError } from 'rxjs/operators';
@@ -15,10 +14,10 @@ export class ClientService {
         return throwError(errorMessage);
     }
 
-    getClients(){
-        return this.http.post(clientsURL, null, this.auth.injectHeaders())
-        .pipe(
-            catchError(this.handleError)
-        );
-    }
+    // getClients(){
+    //     return this.http.post(clientsURL, null, this.auth.injectHeaders())
+    //     .pipe(
+    //         catchError(this.handleError)
+    //     );
+    // }
 }

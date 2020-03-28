@@ -1,5 +1,6 @@
-export const baseURL = 'http://localhost:3000/';
-export const signInURL = baseURL + 'auth/sign_in';
-export const ordersURL = baseURL + 'api/v1/orders';
-export const driversURL = baseURL + 'api/v1/distributors';
-export const clientsURL = baseURL + 'api/v1/clients';
+export const serverURL = 'https://server-mockup.herokuapp.com/';
+export const apiURL = 'https://api-dashb.herokuapp.com/';
+export const signInURL = apiURL + 'auth/login';
+export const ordersURL = serverURL + 'orders';
+export const driversURL = serverURL + 'users?role=delivery&_limit=10';
+
