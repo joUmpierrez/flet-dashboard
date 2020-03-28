@@ -94,7 +94,7 @@ let OrderService = class OrderService {
         this.auth = auth;
     }
     getOrders() {
-        return this.http.get(app_shared_routes_server_routes__WEBPACK_IMPORTED_MODULE_2__["ordersURL"], this.auth.injectHeaders())
+        return this.http.get('https://server-mockup.herokuapp.com/orders')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
     }
     getDrivers() {
@@ -129,7 +129,7 @@ let OrderService = class OrderService {
     }
     handleError(error) {
         console.log(error);
-        const errorMessage = error.error.errors[0];
+        const errorMessage = error.errors[0];
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_6__["throwError"])(errorMessage);
     }
 };

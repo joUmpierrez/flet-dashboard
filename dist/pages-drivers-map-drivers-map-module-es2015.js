@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<agm-map \n    draggableCursor=\"default\" \n    [latitude]=\"lat\"\n    [longitude]=\"lng\"\n    [zoom]=\"zoom\"\n    [scrollwheel]=\"scroll\"\n    (mapClick)=\"placeMarker($event,'pick')\"\n    (mapReady)=\"onMapLoad($event)\">\n</agm-map>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<agm-map \n    draggableCursor=\"default\" \n    [latitude]=\"lat\"\n    [longitude]=\"lng\"\n    [zoom]=\"zoom\"\n    [scrollwheel]=\"scroll\"\n    (mapReady)=\"onMapLoad($event)\">\n</agm-map>\n");
 
 /***/ }),
 

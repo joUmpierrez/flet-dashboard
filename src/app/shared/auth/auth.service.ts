@@ -60,19 +60,7 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    if (localStorage.getItem('client') == null) {
-      return false;
-    }
-    if (localStorage.getItem('token-type') == null) {
-      return false;
-    }
-    if (localStorage.getItem('access-token') == null) {
-      return false;
-    }
-    if (localStorage.getItem('uid') == null) {
-      return false;
-    }
-    if (localStorage.getItem('expiry') == null) {
+    if (localStorage.getItem('token') == null) {
       return false;
     }
     return true;

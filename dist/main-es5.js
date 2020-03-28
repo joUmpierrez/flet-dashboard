@@ -772,6 +772,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _shared_routes_content_layout_routes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ./shared/routes/content-layout.routes */
     "./src/app/shared/routes/content-layout.routes.ts");
+    /* harmony import */
+
+
+    var _shared_auth_auth_guard_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! ./shared/auth/auth-guard.service */
+    "./src/app/shared/auth/auth-guard.service.ts");
 
     var appRoutes = [{
       path: '',
@@ -783,7 +789,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       data: {
         title: 'full Views'
       },
-      children: _shared_routes_full_layout_routes__WEBPACK_IMPORTED_MODULE_5__["Full_ROUTES"]
+      children: _shared_routes_full_layout_routes__WEBPACK_IMPORTED_MODULE_5__["Full_ROUTES"],
+      canActivate: [_shared_auth_auth_guard_service__WEBPACK_IMPORTED_MODULE_7__["AuthGuard"]]
     }, {
       path: '',
       component: _layouts_content_content_layout_component__WEBPACK_IMPORTED_MODULE_4__["ContentLayoutComponent"],
@@ -1501,8 +1508,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           if (this.authService.isAuthenticated()) {
             return true;
-          } // this._router.navigateByUrl('/login');
-          // if(this.authService.isAuthenticated()){
+          }
+
+          this._router.navigateByUrl('/login'); // if(this.authService.isAuthenticated()){
           //   return true;
           // }
           // this._router.navigateByUrl('/login');
@@ -1655,23 +1663,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "isAuthenticated",
         value: function isAuthenticated() {
-          if (localStorage.getItem('client') == null) {
-            return false;
-          }
-
-          if (localStorage.getItem('token-type') == null) {
-            return false;
-          }
-
-          if (localStorage.getItem('access-token') == null) {
-            return false;
-          }
-
-          if (localStorage.getItem('uid') == null) {
-            return false;
-          }
-
-          if (localStorage.getItem('expiry') == null) {
+          if (localStorage.getItem('token') == null) {
             return false;
           }
 
@@ -3192,7 +3184,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var serverURL = 'https://server-mockup.herokuapp.com/';
     var apiURL = 'https://api-dashb.herokuapp.com/';
     var signInURL = apiURL + 'auth/login';
-    var ordersURL = serverURL + 'orders';
+    var ordersURL = 'https://server-mockup.herokuapp.com/orders';
     var driversURL = serverURL + 'users?role=delivery&merchant_id=1';
     var ordersHourSortTime = apiURL + 'orders/ordersPerHour?sort=time';
     var ordersHourSortOrders = apiURL + 'orders/ordersPerHour?sort=orders';

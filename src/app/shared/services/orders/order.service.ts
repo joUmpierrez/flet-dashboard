@@ -11,7 +11,7 @@ export class OrderService {
     constructor(private http: HttpClient, private auth: AuthService) { }
 
     getOrders() {
-        return this.http.get(ordersURL, this.auth.injectHeaders())
+        return this.http.get('https://server-mockup.herokuapp.com/orders')
             .pipe(
                 catchError(this.handleError),
             );
@@ -67,7 +67,7 @@ export class OrderService {
 
     handleError(error) {
         console.log(error);
-        const errorMessage = error.error.errors[0];
+        const errorMessage = error.errors[0];
         return throwError(errorMessage);
     }
 }

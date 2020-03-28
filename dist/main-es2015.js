@@ -349,6 +349,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layouts_content_content_layout_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./layouts/content/content-layout.component */ "./src/app/layouts/content/content-layout.component.ts");
 /* harmony import */ var _shared_routes_full_layout_routes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./shared/routes/full-layout.routes */ "./src/app/shared/routes/full-layout.routes.ts");
 /* harmony import */ var _shared_routes_content_layout_routes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shared/routes/content-layout.routes */ "./src/app/shared/routes/content-layout.routes.ts");
+/* harmony import */ var _shared_auth_auth_guard_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shared/auth/auth-guard.service */ "./src/app/shared/auth/auth-guard.service.ts");
+
 
 
 
@@ -362,7 +364,7 @@ const appRoutes = [
         redirectTo: 'orders',
         pathMatch: 'full',
     },
-    { path: '', component: _layouts_full_full_layout_component__WEBPACK_IMPORTED_MODULE_3__["FullLayoutComponent"], data: { title: 'full Views' }, children: _shared_routes_full_layout_routes__WEBPACK_IMPORTED_MODULE_5__["Full_ROUTES"] },
+    { path: '', component: _layouts_full_full_layout_component__WEBPACK_IMPORTED_MODULE_3__["FullLayoutComponent"], data: { title: 'full Views' }, children: _shared_routes_full_layout_routes__WEBPACK_IMPORTED_MODULE_5__["Full_ROUTES"], canActivate: [_shared_auth_auth_guard_service__WEBPACK_IMPORTED_MODULE_7__["AuthGuard"]] },
     { path: '', component: _layouts_content_content_layout_component__WEBPACK_IMPORTED_MODULE_4__["ContentLayoutComponent"], data: { title: 'content Views' }, children: _shared_routes_content_layout_routes__WEBPACK_IMPORTED_MODULE_6__["CONTENT_ROUTES"] },
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -806,7 +808,7 @@ let AuthGuard = class AuthGuard {
         if (this.authService.isAuthenticated()) {
             return true;
         }
-        // this._router.navigateByUrl('/login');
+        this._router.navigateByUrl('/login');
         // if(this.authService.isAuthenticated()){
         //   return true;
         // }
@@ -895,19 +897,7 @@ let AuthService = class AuthService {
         this.route.navigate(['/login']);
     }
     isAuthenticated() {
-        if (localStorage.getItem('client') == null) {
-            return false;
-        }
-        if (localStorage.getItem('token-type') == null) {
-            return false;
-        }
-        if (localStorage.getItem('access-token') == null) {
-            return false;
-        }
-        if (localStorage.getItem('uid') == null) {
-            return false;
-        }
-        if (localStorage.getItem('expiry') == null) {
+        if (localStorage.getItem('token') == null) {
             return false;
         }
         return true;
@@ -1958,7 +1948,7 @@ __webpack_require__.r(__webpack_exports__);
 const serverURL = 'https://server-mockup.herokuapp.com/';
 const apiURL = 'https://api-dashb.herokuapp.com/';
 const signInURL = apiURL + 'auth/login';
-const ordersURL = serverURL + 'orders';
+const ordersURL = 'https://server-mockup.herokuapp.com/orders';
 const driversURL = serverURL + 'users?role=delivery&merchant_id=1';
 const ordersHourSortTime = apiURL + 'orders/ordersPerHour?sort=time';
 const ordersHourSortOrders = apiURL + 'orders/ordersPerHour?sort=orders';

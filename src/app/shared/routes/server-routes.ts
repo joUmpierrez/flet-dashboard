@@ -1,7 +1,7 @@
 export const serverURL = 'https://server-mockup.herokuapp.com/';
 export const apiURL = 'https://api-dashb.herokuapp.com/';
 export const signInURL = apiURL + 'auth/login';
-export const ordersURL = serverURL + 'orders';
+export const ordersURL = 'https://server-mockup.herokuapp.com/orders';
 export const driversURL = serverURL + 'users?role=delivery&merchant_id=1';
 export const ordersHourSortTime = apiURL + 'orders/ordersPerHour?sort=time';
 export const ordersHourSortOrders = apiURL + 'orders/ordersPerHour?sort=orders';

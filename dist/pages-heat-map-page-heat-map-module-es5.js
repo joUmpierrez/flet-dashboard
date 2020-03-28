@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<!-- <div class=\"row\">\n    <div class=\"col-sm-12\">\n        <div class=\"card\">\n            <div class=\"card-header\">\n                <h4 class=\"card-title\">Heat Map</h4>\n            </div>\n            <div class=\"card-content\">\n                <div class=\"card-body mt-2\">\n                </div>\n            </div>\n        </div>\n    </div>\n</div> -->\n<agm-map \n    draggableCursor=\"default\" \n    [latitude]=\"lat\"\n    [longitude]=\"lng\"\n    [zoom]=\"zoom\"\n    [scrollwheel]=\"scroll\"\n    (mapClick)=\"placeMarker($event,'pick')\"\n    (mapReady)=\"onMapLoad($event)\">\n</agm-map>";
+    __webpack_exports__["default"] = "<!-- <div class=\"row\">\n    <div class=\"col-sm-12\">\n        <div class=\"card\">\n            <div class=\"card-header\">\n                <h4 class=\"card-title\">Heat Map</h4>\n            </div>\n            <div class=\"card-content\">\n                <div class=\"card-body mt-2\">\n                </div>\n            </div>\n        </div>\n    </div>\n</div> -->\n<agm-map \n    draggableCursor=\"default\" \n    [latitude]=\"lat\"\n    [longitude]=\"lng\"\n    [zoom]=\"zoom\"\n    [scrollwheel]=\"scroll\"\n    (mapReady)=\"onMapLoad($event)\">\n</agm-map>";
     /***/
   },
 
