@@ -214,17 +214,17 @@ let DriverStatsComponent = class DriverStatsComponent {
             });
             setInterval(() => {
                 this.inactiveDrivers.forEach(element => {
-                    if (element.seconds > 0) {
-                        element.seconds--;
+                    if (element.seconds < 59) {
+                        element.seconds++;
                     }
-                    else if (element.minutes > 0) {
-                        element.seconds = 59;
-                        element.minutes--;
+                    else if (element.minutes < 59) {
+                        element.seconds = 0;
+                        element.minutes++;
                     }
                     else {
-                        element.hours--;
-                        element.seconds = 59;
-                        element.minutes = 59;
+                        element.hours++;
+                        element.seconds = 0;
+                        element.minutes = 0;
                     }
                 });
             }, 1000);
